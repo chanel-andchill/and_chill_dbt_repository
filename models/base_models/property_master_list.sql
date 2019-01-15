@@ -2,7 +2,6 @@
 
 select  BA_ID_Code as ba_id_code,
         Property_Address as property_address,
-        Region as region,
         Property_Type as property_type,
         Rental_Type as rental_type,
         Contractor as contractor,
@@ -23,9 +22,10 @@ select  BA_ID_Code as ba_id_code,
         case when Date_Offboarded = 'Unknown' then null
         when Date_Offboarded = 'Duplicate' then null
         else PARSE_DATE('%d/%m/%Y',  Date_Offboarded) end as date_offboarded,
-        CONCAT(TRIM(cast(Long_Term_Rental_Estimate_per_Week as STRING),"$")) as long_term_rental_estimate_per_week,
-        CONCAT(TRIM(cast(Maintenance_Threshold as STRING),"$")) as maintenance_threshold,
-        Confluence_Profile_Link as confluence_profile_link,
+        -- Eliminating $ character from long term rental estimate and casting as an integer
+        cast(CONCAT(TRIM(cast(Long_Term_Rental_Estimate_per_Week as STRING),"$"))as INT64) as long_term_rental_estimate_per_week,
+        -- Eliminating $ character from maintenance threshold and casting as an integer
+        cast(CONCAT(TRIM(cast(Maintenance_Threshold as STRING),"$"))as INT64) as maintenance_threshold,
         Portfolio as portfolio,
         PPE as ppe_name,
         Listing_Title as listing_title,
