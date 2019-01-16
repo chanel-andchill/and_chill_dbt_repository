@@ -16,16 +16,19 @@ select  BA_ID_Code as ba_id_code,
         Preferred_Language as preferred_language,
         Lead_BDM as lead_bdm,
         Property_Owner as property_owner,
+        -- Converting Date_Onboarded to a date format
         case when Date_Onboarded = 'Unknown' then null
         else PARSE_DATE('%d/%m/%Y',  Date_Onboarded) end as date_onboarded,
         Status as status,
+        -- Converting Date_Offboarded to a date format
         case when Date_Offboarded = 'Unknown' then null
         when Date_Offboarded = 'Duplicate' then null
         else PARSE_DATE('%d/%m/%Y',  Date_Offboarded) end as date_offboarded,
         -- Eliminating $ character from long term rental estimate and casting as an integer
-        cast(CONCAT(TRIM(cast(Long_Term_Rental_Estimate_per_Week as STRING),"$"))as INT64) as long_term_rental_estimate_per_week,
+        cast(TRIM(cast(Long_Term_Rental_Estimate_per_Week as STRING),"$")as INT64) as long_term_rental_estimate_per_week,
         -- Eliminating $ character from maintenance threshold and casting as an integer
-        cast(CONCAT(TRIM(cast(Maintenance_Threshold as STRING),"$"))as INT64) as maintenance_threshold,
+        case when Maintenance_Threshold = '(Contact CS)' then null
+        else cast(CONCAT(TRIM(Maintenance_Threshold,"$"))as INT64) end as maintenance_threshold,
         Portfolio as portfolio,
         PPE as ppe_name,
         Listing_Title as listing_title,
