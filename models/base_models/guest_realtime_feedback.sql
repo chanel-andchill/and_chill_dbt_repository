@@ -17,3 +17,5 @@ select  Got_it____hidden_name____do_you_feel_that_your_space_is_clean_and_tidy_ 
         Oh_dear__What_can_be_improved_ as what_can_be_improved,
         Submitted_At as time_submitted
     from `and-chill-database.google_sheets.guest_real_time_feedback`
+    -- Ignoring Callum's tests
+    where email != 'callum.forbes@gmail.com'
