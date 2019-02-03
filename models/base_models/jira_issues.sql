@@ -1,5 +1,7 @@
 {{ config(materialized='table') }}
 
+-- jira_issues
+
 select  stylingcontractorhsp as styling_contractor_hsp,
         keyhandoverdate as key_hand_over_date,
         propertystate as property_state,
@@ -29,11 +31,12 @@ select  stylingcontractorhsp as styling_contractor_hsp,
         projectlead as project_lead,
         andchilloverheadscosts as and_chill_overhead_costs,
         -- Cast this as ddmmyy
-        created_mmddyyyy as created_date_1,
+        parse_date('%m%d%Y', created_mmddyyyy) as created_date_1,
         bedrooms as bedrooms,
         typicalcost as typical_cost,
         `rank` as `rank`,
-        bookingautomationid as ba_id_code,
+        case when LENGTH(bookingautomationid) != 5 then null
+        else cast(bookingautomationid as int64) end as ba_id_code,
         summary as summary,
         linkedissues as linked_issues,
         lastviewed as last_viewed,
