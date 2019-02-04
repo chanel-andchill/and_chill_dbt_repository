@@ -1,3 +1,6 @@
+{{ config(materialized='view') }}
+
+
 select  ba_bookings.ba_id_code as ba_id_code,
         ba_bookings.first_night as first_night,
         ba_bookings.last_night as last_night,

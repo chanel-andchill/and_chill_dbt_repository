@@ -1,4 +1,4 @@
-{{ config(materialized='table') }}
+{{ config(materialized='view') }}
 
 select  hubspot_deals.deal_id,
         case  when hubspot_deals.deal_stage = 'closedwon' then 'closed_won'

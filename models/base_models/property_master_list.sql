@@ -1,4 +1,4 @@
-{{ config(materialized='table') }}
+{{ config(materialized='view') }}
 
 select  BA_ID_Code as ba_id_code,
         Property_Address as property_address,

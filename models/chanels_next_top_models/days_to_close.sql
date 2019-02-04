@@ -1,4 +1,4 @@
-{{ config(materialized='table') }}
+{{ config(materialized='view') }}
 
 select  hubspot_deals.deal_id as deal_id,
         hubspot_deals.ba_id_code as ba_id_code,

@@ -1,3 +1,5 @@
+{{ config(materialized='view') }}
+
 select  deal_id,
         deal_open_date,
         extract(day from deal_open_date) as deal_open_day,

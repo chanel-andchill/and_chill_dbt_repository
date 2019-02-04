@@ -1,4 +1,4 @@
-{{ config(materialized='table') }}
+{{ config(materialized='view') }}
 
 -- Want to find the last night of the last booking per property if property has been offboarded
 

@@ -1,4 +1,4 @@
-{{ config(materialized='table') }}
+{{ config(materialized='view') }}
 
 select
         propid as ba_id_code,
@@ -17,7 +17,7 @@ select
         guestmobile as guest_mobile,
         guestphone as guest_phone,
         guestcomments as guest_comments,
-        bookingtime as booking_time,
+        cast(bookingtime as date) as booking_time,
         createddate as date_created,
         referer as booking_channel,
         status as status_code,

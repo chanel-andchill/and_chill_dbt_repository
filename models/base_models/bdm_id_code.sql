@@ -1,4 +1,4 @@
-{{ config(materialized='table') }}
+{{ config(materialized='view') }}
 
 select  cast(bdm_id_code as string) as bdm_id_code,
         bdm_first_name,

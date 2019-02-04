@@ -1,4 +1,4 @@
-{{ config(materialized='table') }}
+{{ config(materialized='view') }}
 
 select  days_onboard.ba_id_code,
         days_onboard.days_onboard,

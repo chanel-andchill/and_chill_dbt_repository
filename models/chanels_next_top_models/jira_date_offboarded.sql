@@ -1,4 +1,4 @@
-{{ config(materialized='table') }}
+{{ config(materialized='view') }}
 
 -- Want to find the last jira issue associated with the property for properties that have been offboarded.
 

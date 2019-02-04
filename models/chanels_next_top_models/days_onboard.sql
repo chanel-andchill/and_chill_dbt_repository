@@ -1,4 +1,4 @@
-{{ config(materialized='table') }}
+{{ config(materialized='view') }}
 
 select  date_onboarded.ba_id_code as ba_id_code,
         case when property_master_list.status = 'Offboarded' then date_diff(date_offboarded.date_offboarded, date_onboarded.date_onboarded, day)

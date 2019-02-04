@@ -1,4 +1,4 @@
-{{ config(materialized='table') }}
+{{ config(materialized='view') }}
 
 -- Want to find the earliest issue associated with a property. Find the date of that issue and set as jira_date_onboarded
 

@@ -1,4 +1,4 @@
-{{ config(materialized='table') }}
+{{ config(materialized='view') }}
 
 select  dealid as deal_id,
         properties.booking_automation_id.value as ba_id_code,
