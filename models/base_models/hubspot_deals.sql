@@ -29,6 +29,6 @@ select  dealid as deal_id,
         cast(properties.createdate.value as date) as deal_open_date,
         cast(properties.dealstage.`timestamp` as date) as date_of_deal,
         properties.closedate.value as close_date
-        from hubspot.deals hd
+        from `and-chill-database.hubspot.deals`
         left join {{ref('bdm_id_code')}}
-        on bdm_id_code.bdm_id_code = hd.properties.lead_bdm.value
+        on bdm_id_code.bdm_id_code = `and-chill-database.hubspot.deals`.properties.lead_bdm.value
