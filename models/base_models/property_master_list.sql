@@ -1,14 +1,14 @@
-{{ config(materialized='view') }}
+{{ config(materialized='table') }}
 
-select  BA_ID_Code as ba_id_code,
-        Property_Address as property_address,
+SELECT  BA_ID_Code AS ba_id_code,
+        Property_Address AS property_address,
         -- Converting Date_Onboarded to a date format
-        case  when Date_Onboarded = 'Unknown' then null
-              else parse_date('%d/%m/%Y', Date_Onboarded) end as date_onboarded,
-        Status as status,
+        CASE WHEN Date_Onboarded = 'Unknown' THEN NULL
+          ELSE PARSE_DATE('%d/%m/%Y', Date_Onboarded) END AS date_onboarded,
+        Status AS status,
               -- Converting Date_Offboarded to a date format
-        case when Date_Offboarded = 'Unknown' then null
-              when Date_Offboarded = 'Duplicate' then null
+        CASE WHEN Date_Offboarded = 'Unknown' THEN NULL
+          WHEN Date_Offboarded = 'Duplicate' THEN NULL
               else parse_date('%d/%m/%Y', Date_Offboarded) end as date_offboarded,
         Property_Owner as property_owner,
         Preferred_Language as preferred_language,
@@ -19,7 +19,8 @@ select  BA_ID_Code as ba_id_code,
         -- Eliminating $ character from maintenance threshold and casting as an integer
         case when Maintenance_Threshold = '(Contact CS)' then null
         else cast(CONCAT(TRIM(Maintenance_Threshold,"$"))as INT64) end as maintenance_threshold,
-        Contractor as contractor,
+        Contractor as cleaner,
+        90 + (20 * (bedrooms + bathrooms)) as cleaning_fee,
         Security_Level_ID as security_level_id,
         Bedrooms as bedrooms,
         Bathrooms as bathrooms,
