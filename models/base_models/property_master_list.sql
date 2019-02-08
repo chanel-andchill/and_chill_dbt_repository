@@ -17,12 +17,12 @@ SELECT  BA_ID_Code AS ba_id_code,
         Property_Owner AS property_owner,
         Preferred_Language AS preferred_language,
         Listing_Title AS listing_title,
-        CAST(TRIM(CAST(Long_Term_Rental_Estimate_per_Week AS STRING),"$")AS INT64) AS long_term_rental_estimate_per_week,
+        CAST(TRIM(CAST(Long_Term_Rental_Estimate_per_Week AS STRING),"$") AS INT64) AS long_term_rental_estimate_per_week,
         Property_Type AS property_type,
         Rental_Type AS rental_type,
         -- Eliminating $ character from maintenance threshold and casting as an integer
         CASE  WHEN Maintenance_Threshold = '(Contact CS)' THEN NULL
-              ELSE CASE(CONCAT(TRIM(Maintenance_Threshold,"$"))AS INT64)
+              ELSE CAST(CONCAT(TRIM(Maintenance_Threshold,"$")) AS INT64)
               END AS maintenance_threshold,
         Contractor AS cleaner,
         90 + (20 * (bedrooms + bathrooms)) AS cleaning_fee,

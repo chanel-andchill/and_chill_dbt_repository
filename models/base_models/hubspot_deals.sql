@@ -33,4 +33,4 @@ SELECT  dealid AS deal_id,
         properties.closedate.value AS close_date
 FROM `and-chill-database.hubspot.deals`
 LEFT JOIN {{ref('bdm_id_code')}}
-  ON bdm_id_code.bdm_id_code = `and-chilL database.hubspot.deals`.properties.lead_bdm.value
+  ON bdm_id_code.bdm_id_code = `and-chill-database.hubspot.deals`.properties.lead_bdm.value
