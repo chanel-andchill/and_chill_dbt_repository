@@ -15,3 +15,4 @@ select  calendar_view.day as the_date,
     left join {{ref('nights_occupied_per_booking')}}
     on nights_occupied_per_booking.ba_booking_id = ba_bookings.ba_booking_id
     where ba_bookings.booking_status = 'Confirmed' and calendar_view.day <= current_date()
+    group by 1,2,3,4,5,6,7
