@@ -15,5 +15,7 @@ LEFT JOIN {{ref('ba_bookings')}}
 ON ba_bookings.ba_booking_id = property_occupancy_per_day.ba_booking_id
 WHERE ba_bookings.booking_status = 'Confirmed'
   AND ba_bookings.last_night < current_date()
-  AND ba_bookings.booking_channel NOT LIKE '%Airbnb%'
 ORDER BY 1
+
+
+-- Removed this line AND ba_bookings.booking_channel NOT LIKE '%Airbnb%'

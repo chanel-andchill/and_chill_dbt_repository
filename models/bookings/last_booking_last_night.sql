@@ -2,10 +2,10 @@
 
 -- Want to find the last night of the last booking per property if property has been offboarded
 
-select  ba_bookings.ba_id_code as ba_id_code,
-        max(ba_bookings.last_night) as last_night
-        from {{ref('ba_bookings')}}
-        left join {{ref('property_master_list')}}
-        on ba_bookings.ba_id_code = property_master_list.ba_id_code
-        where ba_bookings.booking_status = 'Confirmed' and property_master_list.status = 'Offboarded'
-        group by 1
+SELECT  ba_bookings.ba_id_code AS ba_id_code,
+        MAX(ba_bookings.last_night) AS last_night
+FROM {{ref('ba_bookings')}}
+LEFT JOIN {{ref('property_master_list')}}
+ON ba_bookings.ba_id_code = property_master_list.ba_id_code
+WHERE ba_bookings.booking_status = 'Confirmed' AND property_master_list.status = 'Offboarded'
+GROUP BY 1
