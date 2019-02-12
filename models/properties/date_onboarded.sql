@@ -5,7 +5,7 @@
 SELECT  property_master_list.ba_id_code AS ba_id_code,
         CASE  WHEN first_booking_first_night.first_night IS NULL THEN LEAST(jira_date_onboarded.jira_date_onboarded, property_master_list.date_onboarded)
               WHEN jira_date_onboarded.jira_date_onboarded IS NULL THEN LEAST(first_booking_first_night.first_night,   property_master_list.date_onboarded)
-              WHAT property_master_list.date_onboarded IS NULL THEN
+              WHEN property_master_list.date_onboarded IS NULL THEN
               LEAST(jira_date_onboarded.jira_date_onboarded, first_booking_first_night.first_night)
               ELSE LEAST(jira_date_onboarded.jira_date_onboarded, first_booking_first_night.first_night, property_master_list.date_onboarded) END AS date_onboarded
 FROM {{ref('property_master_list')}}
