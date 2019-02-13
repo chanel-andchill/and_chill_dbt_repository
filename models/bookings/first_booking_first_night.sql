@@ -4,6 +4,6 @@
 
 SELECT  ba_bookings.ba_id_code AS ba_id_code,
         MIN(ba_bookings.first_night) AS first_night
-        FROM {{ref('ba_bookings')}}
-        WHERE ba_bookings.booking_status = 'Confirmed'
-        GROUP BY 1
+FROM {{ref('ba_bookings')}}
+WHERE ba_bookings.booking_status = 'Confirmed'
+GROUP BY 1
