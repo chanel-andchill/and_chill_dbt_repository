@@ -2,18 +2,21 @@
 
 -- Joins the calendar view with ba_bookings to determine the average daily rate. Note this model does not consider Airbnb data as we do not have total paid.
 
-SELECT  property_occupancy_per_day.the_date,
-        property_occupancy_per_day.ba_id_code,
-        property_occupancy_per_day.ba_booking_id,
-        property_occupancy_per_day.property_address,
-        property_occupancy_per_day.property_owner,
+WITH  ba_bookings AS (SELECT * FROM {{ref('ba_bookings')}}),
+      nights_occupied_per_booking AS (SELECT * FROM {{ref('nights_occupied_per_booking')}})
+
+SELECT  ba_bookings.ba_id_code,
+        ba_bookings.ba_booking_id,
         ba_bookings.first_night,
         ba_bookings.last_night,
-        ba_bookings.total_charges/property_occupancy_per_day.nights_occupied AS average_daily_rate
-FROM {{ref('property_occupancy_per_day')}}
-LEFT JOIN {{ref('ba_bookings')}}
-ON ba_bookings.ba_booking_id = property_occupancy_per_day.ba_booking_id
+        ba_bookings.total_charges/nights_occupied_per_booking.nights_occupied AS average_daily_rate
+FROM ba_bookings
+LEFT JOIN nights_occupied_per_booking
+  ON nights_occupied_per_booking.ba_booking_id = ba_bookings.ba_booking_id
 WHERE ba_bookings.booking_status = 'Confirmed'
   AND ba_bookings.last_night < current_date()
-  AND ba_bookings.booking_channel NOT LIKE '%Airbnb%'
 ORDER BY 1
+
+
+-- Removed this line AND ba_bookings.booking_channel NOT LIKE '%Airbnb%'
+-- Need to join nights_occupied_per_booking instead?

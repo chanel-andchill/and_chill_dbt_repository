@@ -2,14 +2,14 @@
 
 -- Choosing the earliest date to be the date onboarded
 
-select  property_master_list.ba_id_code as ba_id_code,
-        case  when first_booking_first_night.first_night is null then least(jira_date_onboarded.jira_date_onboarded, property_master_list.date_onboarded)
-              when jira_date_onboarded.jira_date_onboarded is null then least(first_booking_first_night.first_night,   property_master_list.date_onboarded)
-              when property_master_list.date_onboarded is null then
-              least(jira_date_onboarded.jira_date_onboarded, first_booking_first_night.first_night)
-              else least(jira_date_onboarded.jira_date_onboarded, first_booking_first_night.first_night, property_master_list.date_onboarded)end as date_onboarded
-        from {{ref('property_master_list')}}
-        left join {{ref('first_booking_first_night')}}
-        on property_master_list.ba_id_code = first_booking_first_night.ba_id_code
-        left join {{ref('jira_date_onboarded')}}
-        on property_master_list.ba_id_code = jira_date_onboarded.ba_id_code
+SELECT  property_master_list.ba_id_code AS ba_id_code,
+        CASE  WHEN first_booking_first_night.first_night IS NULL THEN LEAST(jira_date_onboarded.jira_date_onboarded, property_master_list.date_onboarded)
+              WHEN jira_date_onboarded.jira_date_onboarded IS NULL THEN LEAST(first_booking_first_night.first_night,   property_master_list.date_onboarded)
+              WHEN property_master_list.date_onboarded IS NULL THEN
+              LEAST(jira_date_onboarded.jira_date_onboarded, first_booking_first_night.first_night)
+              ELSE LEAST(jira_date_onboarded.jira_date_onboarded, first_booking_first_night.first_night, property_master_list.date_onboarded) END AS date_onboarded
+FROM {{ref('property_master_list')}}
+LEFT JOIN {{ref('first_booking_first_night')}}
+  ON property_master_list.ba_id_code = first_booking_first_night.ba_id_code
+LEFT JOIN {{ref('jira_date_onboarded')}}
+  ON property_master_list.ba_id_code = jira_date_onboarded.ba_id_code

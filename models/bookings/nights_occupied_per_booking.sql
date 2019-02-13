@@ -1,13 +1,13 @@
 {{ config(materialized='view') }}
 
-select  property_master_list.ba_id_code as ba_id_code,
-        property_master_list.property_address as property_address,
-        ba_bookings.ba_booking_id as ba_booking_id,
-        ba_bookings.first_night as first_night,
-        ba_bookings.last_night as last_night,
-        case when ba_bookings.last_night >= current_date() then DATE_DIFF(current_date(), ba_bookings.first_night, DAY) + 1
-        else DATE_DIFF(ba_bookings.last_night, ba_bookings.first_night, DAY) + 1 end as nights_occupied
-    from {{ref('ba_bookings')}}
-    left join {{ref('property_master_list')}}
-      on ba_bookings.ba_id_code = property_master_list.ba_id_code
-    where ba_bookings.first_night <= current_date() and ba_bookings.booking_status = 'Confirmed'
+SELECT  property_master_list.ba_id_code AS ba_id_code,
+        property_master_list.property_address AS property_address,
+        ba_bookings.ba_booking_id AS ba_booking_id,
+        ba_bookings.first_night AS first_night,
+        ba_bookings.last_night AS last_night,
+        CASE WHEN ba_bookings.last_night >= CURRENT_DATE() THEN DATE_DIFF(CURRENT_DATE(), ba_bookings.first_night, DAY) + 1
+        ELSE DATE_DIFF(ba_bookings.last_night, ba_bookings.first_night, DAY) + 1 END AS nights_occupied
+FROM {{ref('ba_bookings')}}
+LEFT JOIN {{ref('property_master_list')}}
+  ON ba_bookings.ba_id_code = property_master_list.ba_id_code
+WHERE ba_bookings.first_night <= CURRENT_DATE() AND ba_bookings.booking_status = 'Confirmed'

@@ -2,7 +2,7 @@
 
 -- Taking raw Booking Automation data from BA_Bookings in SQL Server.
 
-SELECT  propid AS ba_id_code,
+SELECT  distinct propid AS ba_id_code,
         babookingid AS ba_booking_id,
         bookid AS reservation_code,
         -- For linking charge automation with booking automation

@@ -2,7 +2,7 @@
 
 -- Want to find the earliest issue associated with a property. Find the date of that issue and set as jira_date_onboarded
 
-select  jira_issues.ba_id_code as ba_id_code,
-        min(created_date_1) as jira_date_onboarded
-        from {{ref('jira_issues')}}
-        group by 1
+SELECT  jira_issues.ba_id_code AS ba_id_code,
+        MIN(created_date_1) AS jira_date_onboarded
+FROM {{ref('jira_issues')}}
+GROUP BY 1
