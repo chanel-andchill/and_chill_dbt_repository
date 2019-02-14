@@ -22,4 +22,5 @@ JOIN calendar_view cv
   ON cv.day >= don.date_onboarded AND cv.day <= IFNULL(dof.date_offboarded, CURRENT_DATE())
 LEFT JOIN average_daily_rate_per_booking adr
   ON cv.day between adr.first_night and adr.last_night and adr.ba_id_code = pm.ba_id_code
--- Need to create a join between cv and average daily rate only when there is a booking on that date
+
+where adr.booking_channel not like '%Airbnb.com%' or adr.booking_channel is null

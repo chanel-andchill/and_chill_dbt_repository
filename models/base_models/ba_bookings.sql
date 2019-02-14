@@ -25,7 +25,7 @@ SELECT  distinct propid AS ba_id_code,
         -- Ignore USD currency, ask Shubes
         CASE  WHEN referer LIKE '%Airbnb%' AND status != 0 THEN 'Confirmed'
               WHEN referer = 'Booking.com' AND status != 0 AND (flagtext = 'PAID+VERIFIED' OR flagtext = 'PAID + VERIFIED') THEN 'Confirmed'
-              WHEN referer = 'Booking.com' AND CAST(bookingtime as DATE) < CAST('2018-12-01' AS DATE) and status != 0 AND (flagtext = 'Paid') THEN 'Confirmed'
+              WHEN referer = 'Booking.com' AND CAST(bookingtime as DATE) < CAST('2018-12-01' AS DATE) AND status != 0 AND (flagtext = 'Paid') THEN 'Confirmed'
               WHEN referer NOT LIKE 'Booking.com' AND status != 0 AND flagtext LIKE 'Paid' THEN 'Confirmed'
               ELSE 'Unconfirmed' END AS booking_status,
         currency AS currency,
