@@ -26,6 +26,8 @@ SELECT  propID AS ba_id_code,
               WHEN referer = 'Booking.com' AND status != 0 AND (flagtext = 'PAID+VERIFIED' OR flagtext = 'PAID + VERIFIED') THEN 'Confirmed'
               WHEN referer = 'Booking.com' AND CAST(bookingtime as DATE) < CAST('2018-12-01' AS DATE) AND status != 0 AND (flagtext = 'Paid') THEN 'Confirmed'
               WHEN referer NOT LIKE 'Booking.com' AND status != 0 AND flagtext LIKE 'Paid' THEN 'Confirmed'
+              WHEN status = 0 THEN 'Cancelled'
+              WHEN CAST(firstNight AS DATE) <= CURRENT_DATE() and status = 1 THEN 'Cancelled'
               ELSE 'Unconfirmed' END AS booking_status,
         currency AS currency,
         flagtext AS paid_status,
@@ -35,4 +37,4 @@ SELECT  propID AS ba_id_code,
         CAST(numAdult AS INT64) AS number_of_adults,
         CAST(numChild AS INT64) AS number_of_children,
         isdeleted AS is_deleted
-FROM `and-chill-database.booking_automation.BABookings`
+FROM `and-chill-database.sql_server.BABookings`
