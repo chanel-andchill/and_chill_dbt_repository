@@ -1,5 +1,7 @@
 {{ config(materialized='view') }}
 
+-- An estimate of how long it takes a BDM to close a sale.
+
 SELECT  hubspot_deals.deal_id AS deal_id,
         hubspot_deals.ba_id_code AS ba_id_code,
         hubspot_deals.bdm_first_name AS bdm_first_name,

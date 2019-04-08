@@ -1,5 +1,7 @@
 {{ config(materialized='view') }}
 
+-- 
+
 SELECT  date_onboarded.ba_id_code AS ba_id_code,
         CASE  WHEN property_master_list.status = 'Offboarded' THEN date_diff(date_offboarded.date_offboarded, date_onboarded.date_onboarded, day)
               ELSE date_diff(current_date, date_onboarded.date_onboarded, day)

@@ -1,6 +1,7 @@
 {{ config(materialized='view') }}
 
--- Want to find the last night of the last booking per property if property has been offboarded
+-- Want to find the last night of the last booking per property if property has
+-- been offboarded. To be used later to define true offboarded date.
 
 SELECT  ba_bookings.ba_id_code AS ba_id_code,
         MAX(ba_bookings.last_night) AS last_night

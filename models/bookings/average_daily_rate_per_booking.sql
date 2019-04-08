@@ -1,6 +1,7 @@
 {{ config(materialized='view') }}
 
--- Joins the calendar view with ba_bookings to determine the average daily rate. Note this model does not consider Airbnb data as we do not have total paid.
+-- Joins the calendar view with ba_bookings to determine the average daily rate.
+-- Note this model does not consider Airbnb data as we do not have total paid.
 
 WITH  ba_bookings AS (SELECT * FROM {{ref('ba_bookings')}}),
       nights_occupied_per_booking AS (SELECT * FROM {{ref('nights_occupied_per_booking')}})

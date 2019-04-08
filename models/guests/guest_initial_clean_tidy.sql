@@ -1,6 +1,7 @@
 {{ config(materialized='view') }}
 
--- We only have this data from 7/1/19
+-- To determine which cleaners are doing the best job.
+-- CAVEAT: We only have this data from 7/1/19
 
 SELECT  AVG(guest_realtime_feedback.do_you_feel_the_space_is_clean_and_tidy) AS average_clean_and_tidy_rating,
         COUNT(guest_realtime_feedback.do_you_feel_the_space_is_clean_and_tidy) AS cleans_completed,

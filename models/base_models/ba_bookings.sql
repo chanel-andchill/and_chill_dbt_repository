@@ -1,6 +1,6 @@
 {{ config(materialized='view') }}
 
--- Taking raw Booking Automation data from BA_Bookings in SQL Server.
+-- Taking raw Booking Automation data from BA_Bookings in BigQuery.
 
 SELECT  propID AS ba_id_code,
         bookId AS ba_booking_id,
@@ -21,7 +21,8 @@ SELECT  propID AS ba_id_code,
         createddate AS date_created,
         referer AS booking_channel,
         status AS status_code,
-        -- Ignore USD currency, ask Shubes
+        -- Determining whether a booking was realised or not based on status
+        -- (not to be confused with status code - I have no idea what that is)
         CASE  WHEN referer LIKE '%Airbnb%' AND status != 0 THEN 'Confirmed'
               WHEN referer = 'Booking.com' AND status != 0 AND (flagtext = 'PAID+VERIFIED' OR flagtext = 'PAID + VERIFIED') THEN 'Confirmed'
               WHEN referer = 'Booking.com' AND CAST(bookingtime as DATE) < CAST('2018-12-01' AS DATE) AND status != 0 AND (flagtext = 'Paid') THEN 'Confirmed'
@@ -29,6 +30,8 @@ SELECT  propID AS ba_id_code,
               WHEN status = 0 THEN 'Cancelled'
               WHEN CAST(firstNight AS DATE) <= CURRENT_DATE() and status = 1 THEN 'Cancelled'
               ELSE 'Unconfirmed' END AS booking_status,
+
+        -- Ignore USD currency, ask Shubes
         currency AS currency,
         flagtext AS paid_status,
         price AS total_charges,

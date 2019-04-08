@@ -1,6 +1,7 @@
 {{ config(materialized='view') }}
 
--- A view to join on to display every day there is a booking.
+-- A view to join on other tables to display every day there is data recorded.
+-- E.g. Join on ba_bookings to get every day someone stayed in a property
 
 SELECT  day
 FROM  UNNEST(

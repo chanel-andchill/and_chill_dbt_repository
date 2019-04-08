@@ -1,5 +1,7 @@
 {{ config(materialized='view') }}
 
+-- Caluclation the average daily rate for a property, based on money made from a
+-- booking over how many days the booking went for.
 
 SELECT  ba_bookings.ba_id_code AS ba_id_code,
         ba_bookings.first_night AS first_night,

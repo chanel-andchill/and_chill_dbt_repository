@@ -19,4 +19,5 @@ SELECT  CAST(property AS INT64) AS ba_id_code,
         Oh_dear__What_can_be_improved_ AS what_can_be_improved,
         Submitted_At AS time_submitted
 FROM `and-chill-database.google_sheets.guest_real_time_feedback`
+-- I think callum did some test reviews, removing this fake data.
 WHERE email != 'callum.forbes@gmail.com'

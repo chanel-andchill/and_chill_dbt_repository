@@ -1,5 +1,7 @@
 {{ config(materialized='view') }}
 
+-- Comparing the short term versus long term rental revenue.
+
 WITH  property_master_list AS ( SELECT * FROM {{ref('property_master_list')}} ),
       date_onboarded AS (SELECT * FROM {{ref('date_onboarded')}}),
       date_offboarded AS (SELECT * FROM {{ref('date_offboarded')}}),

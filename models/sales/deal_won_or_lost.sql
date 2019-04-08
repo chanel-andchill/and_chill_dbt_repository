@@ -1,5 +1,7 @@
 {{ config(materialized='view') }}
 
+-- Making it clearer whether a deal was won or lost.
+
 SELECT  hubspot_deals.deal_id,
         CASE  WHEN hubspot_deals.deal_stage = 'closedwon' THEN 'closed_won'
               WHEN hubspot_deals.deal_stage = 'closedlost' THEN 'closed_lost'

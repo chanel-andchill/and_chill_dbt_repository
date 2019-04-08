@@ -1,5 +1,8 @@
 {{ config(materialized='view') }}
 
+-- Determines the percentage of time a property has been occupied since they've
+-- been onboarded.
+
 WITH  property_master_list AS (SELECT * FROM {{ref('property_master_list')}}),
       booking_occupancy AS (SELECT * FROM {{ref('nights_occupied_per_booking')}}),
       jira_issues AS (SELECT * FROM {{ref('jira_issues')}}),

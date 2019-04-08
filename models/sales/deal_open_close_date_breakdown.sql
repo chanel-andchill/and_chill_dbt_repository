@@ -1,5 +1,8 @@
 {{ config(materialized='view') }}
 
+-- Looks at the dates from when a deal was opened to when a deal was closed
+-- if it was won or lost (there are other end results we do not need to consider).
+
 SELECT  deal_id,
         deal_open_date,
         EXTRACT(day FROM deal_open_date) AS deal_open_day,

@@ -1,5 +1,7 @@
 {{ config(materialized='view') }}
 
+-- Determines how many nights someone stayed in a property for each booking.
+
 SELECT  property_master_list.ba_id_code AS ba_id_code,
         property_master_list.property_address AS property_address,
         ba_bookings.ba_booking_id AS ba_booking_id,

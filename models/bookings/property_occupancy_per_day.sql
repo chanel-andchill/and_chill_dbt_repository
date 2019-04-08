@@ -1,5 +1,7 @@
 {{ config(materialized='view') }}
 
+-- Determining whether someone has stayed in a property for every given day.
+
 
 SELECT  calendar_view.day AS the_date,
         ba_bookings.ba_id_code AS ba_id_code,

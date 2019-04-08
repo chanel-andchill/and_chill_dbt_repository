@@ -1,6 +1,7 @@
 {{ config(materialized='view') }}
 
--- I want the ppe name to fill in for every booking
+-- I want the ppe name to fill in for every booking so we can attribute bookings
+-- to ppe's.
 
 SELECT  ba_bookings.ba_id_code AS ba_id_code,
         reservation_code AS reservation_code,
