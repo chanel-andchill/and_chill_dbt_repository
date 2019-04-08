@@ -41,5 +41,6 @@ SELECT  BA_ID_Code AS ba_id_code,
         Commission AS commission,
         Comments AS comments,
         PropKey AS propkey,
-        Jira_Task_Key AS jira_task_key
+        Jira_Task_Key AS jira_task_key,
+        client_email AS client_email
 FROM `and-chill-database.google_sheets.property_master_list`

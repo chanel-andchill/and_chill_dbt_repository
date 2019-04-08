@@ -23,6 +23,6 @@ JOIN calendar_view cv
   ON cv.day >= don.date_onboarded AND cv.day <= IFNULL(dof.date_offboarded, CURRENT_DATE())
 LEFT JOIN average_daily_rate_per_booking adr
   ON cv.day BETWEEN adr.first_night AND adr.last_night AND adr.ba_id_code = pm.ba_id_code
-WHERE adr.booking_channel NOT LIKE '%Airbnb.com%' OR adr.booking_channel IS NULL
+WHERE (adr.booking_channel NOT LIKE '%Airbnb.com%' OR adr.booking_channel IS NULL)
 AND (dof.date_offboarded is NULL
 OR dof.date_offboarded > current_date())
